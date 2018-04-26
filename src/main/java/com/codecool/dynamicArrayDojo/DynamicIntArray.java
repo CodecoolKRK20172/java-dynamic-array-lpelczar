@@ -1,6 +1,7 @@
 package com.codecool.dynamicArrayDojo;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 class DynamicIntArray {
 
@@ -24,6 +25,17 @@ class DynamicIntArray {
             this.array = Arrays.copyOf(array, array.length + 1);
             array[actualSize] = number;
             actualSize++;
+        }
+    }
+
+    void remove(int number) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == number) {
+                int[] firstHalf = Arrays.copyOfRange(array, 0, i);
+                int[] secondHalf = Arrays.copyOfRange(array, i + 1, array.length);
+                this.array = IntStream.concat(Arrays.stream(firstHalf), Arrays.stream(secondHalf)).toArray();
+                break;
+            }
         }
     }
 
