@@ -28,15 +28,13 @@ class DynamicIntArray {
         }
     }
 
-    void remove(int number) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == number) {
-                int[] firstHalf = Arrays.copyOfRange(array, 0, i);
-                int[] secondHalf = Arrays.copyOfRange(array, i + 1, array.length);
-                this.array = IntStream.concat(Arrays.stream(firstHalf), Arrays.stream(secondHalf)).toArray();
-                break;
-            }
+    void remove(int index) {
+        if (index < 0 || index >= array.length) {
+            throw new ArrayIndexOutOfBoundsException();
         }
+        int[] firstHalf = Arrays.copyOfRange(array, 0, index);
+        int[] secondHalf = Arrays.copyOfRange(array, index + 1, array.length);
+        this.array = IntStream.concat(Arrays.stream(firstHalf), Arrays.stream(secondHalf)).toArray();
     }
 
     @Override
